@@ -27,7 +27,7 @@ $ yarn dev
 
 ## 组件状态
 
-- 组件状态和 vue2 有些差别，比如生命周期函数添加 on，如果要用就要引入，不像 vue2 直接在 vue 组件内就可以随意使用
+- 组件状态和 vue2 有些差别，比如生命周期函数添加 on，引入式使用，不像 vue2 直接在 vue 组件内就可以随意使用
 - 数据状态要用 ref 和 reactive 来声明响应式属性，ref 用来生命基本类型，比如 boolean, string, number; reactive 用来声明复杂数据类型。ref 声明的数据访问的时候要加 xxx.value，而 reactive 声明的数据访问的时候可以正常使用，并且不能直接覆盖数据为其重新赋值，这样就失去了响应式。
 
 ```javascript
@@ -61,4 +61,4 @@ const editTodo = (todo: ItemInterFace) => {
 };
 ```
 
-> 用 setup 语法糖的方式不用写 steup 函数，组件也不用再手动注册，组件状态和方法可以用 defineProps、defineEmits、defineExpose，并且 vue3.0 支持我们的组件内部可以不用再写顶级 dom，省去一个 div 的感觉真好
+> 用 setup 语法糖的方式不用写 steup 函数，组件也不用再手动注册，组件状态和方法可以用 defineProps、defineEmits、defineExpose，并且 vue3.0 支持我们的组件内部可以不用再写顶级 dom，省去一个 div 的 感觉非常好

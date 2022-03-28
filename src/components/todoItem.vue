@@ -2,7 +2,7 @@
 import { ItemInterFace } from "../interface";
 import { ref } from "vue";
 
-defineProps<{ todo: ItemInterFace | null; editedTodoId: number }>();
+defineProps<{ todo: ItemInterFace; editedTodoId: number }>();
 const emit = defineEmits(["changeId", "editTodos", "deleteItem"]);
 
 const editThis = (id: number) => {

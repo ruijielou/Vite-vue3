@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import { RouteLocationNormalized, useRoute } from "vue-router";
+import { useRoute } from "vue-router";
 import Footer from "./components/Footer.vue";
 import TodoItem from "./components/todoItem.vue";
 import { reactive, ref, watch, onMounted } from "vue";
@@ -32,7 +32,7 @@ const changeId = (id: number) => {
   editedTodoId.value = id;
 };
 const editTodos = (todo: ItemInterFace) => {
-  todoList.forEach((item) => {
+  todoList.forEach((item: ItemInterFace) => {
     if (item.id == todo.id) {
       item = { ...todo };
       setStorage({ ...item });
@@ -41,9 +41,9 @@ const editTodos = (todo: ItemInterFace) => {
   });
 };
 const deleteItem = (todo: ItemInterFace) => {
-  const lists = todoList.filter((item) => item.id !== todo.id);
+  const lists = todoList.filter((item: ItemInterFace) => item.id !== todo.id);
   todoList.length = 0;
-  lists.forEach((item) => {
+  lists.forEach((item: ItemInterFace) => {
     todoList.push({ ...item });
   });
   deleteStorage(todo.id);
@@ -66,7 +66,7 @@ const clearTodo = () => {
   todoList.length = 0;
   clearStorage();
 };
-watch(visibility, (newVal, oldVal) => {
+watch(visibility, (newVal: string, oldVal: string) => {
   initData(newVal);
 });
 onMounted(() => {
@@ -85,8 +85,11 @@ onMounted(() => {
       <input id="toggle-all" class="toggle-all" type="checkbox">
       <label for="toggle-all">Mark all as complete</label>
       <ul class="todo-list" v-show="todoList.length">
-        <TodoItem @changeId="changeId" @deleteItem="deleteItem" @editTodos="editTodos" v-for="item in todoList"
-          :editedTodoId="editedTodoId" :todo="item" />
+        <template v-for="item in todoList">
+          <TodoItem @changeId="changeId" v-if="item && item.id" @deleteItem="deleteItem" @editTodos="editTodos"
+            :editedTodoId="editedTodoId" :todo="item" />
+
+        </template>
       </ul>
     </section>
     <Footer @changeName="changeName" @clearTodo="clearTodo" :visibility="visibility"
